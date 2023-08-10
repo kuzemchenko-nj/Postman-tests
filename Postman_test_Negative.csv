@@ -1,0 +1,4 @@
+name, suite_mode, show_announcement, status, error_text
+"Test_1", 4, true, 400, "Field :suite_mode is not a supported enum value"
+"Test_2", 3, 10, 400, "Field :show_announcement is not a valid boolean."
+"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium q", 2, true, 400, "Field :name is too long (250 characters at most)."
