@@ -10,6 +10,48 @@
 			"name": "Positive testing",
 			"item": [
 				{
+					"name": "Delete project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response time is less than 1000ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/{{api}}/delete_project/{{projectID}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api}}",
+								"delete_project",
+								"{{projectID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create new project",
 					"event": [
 						{
@@ -147,26 +189,14 @@
 						}
 					},
 					"response": []
-				},
+				}
+			]
+		},
+		{
+			"name": "Negative testing",
+			"item": [
 				{
 					"name": "Delete project",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"pm.test(\"Response time is less than 1000ms\", function () {",
-									"    pm.expect(pm.response.responseTime).to.be.below(1000);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
 					"request": {
 						"method": "POST",
 						"header": [
@@ -177,24 +207,62 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/{{api}}/delete_project/{{projectID}}",
+							"raw": "{{base_url}}/{{api}}delete_project/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api}}delete_project",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update project",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{email}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"show_announcement\": false\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/{{api}}/update_project/7",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"{{api}}",
-								"delete_project",
-								"{{projectID}}"
+								"update_project",
+								"7"
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Negative testing",
-			"item": [
+				},
 				{
 					"name": "Create new project",
 					"event": [
@@ -258,133 +326,12 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Update project",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "{{password}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{email}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"show_announcement\": false\n}"
-						},
-						"url": {
-							"raw": "{{base_url}}/{{api}}/update_project/7",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"{{api}}",
-								"update_project",
-								"7"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete project",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{base_url}}/{{api}}delete_project/1",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"{{api}}delete_project",
-								"1"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
 		{
 			"name": "GET requests",
-			"item": [
-				{
-					"name": "Get project info by ID",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "{{password}}",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "{{email}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/{{api}}/get_project/1",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"{{api}}",
-								"get_project",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get list of available projects",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{base_url}}/{{api}}/get_projects",
-							"host": [
-								"{{base_url}}"
-							],
-							"path": [
-								"{{api}}",
-								"get_projects"
-							]
-						}
-					},
-					"response": []
-				}
-			]
+			"item": []
 		}
 	]
 }
